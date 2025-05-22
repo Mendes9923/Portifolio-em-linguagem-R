@@ -165,6 +165,7 @@ glance(modelo) %>%
 portfolio-R/
 ├── Introdução/
 ├── Linguagem R/
+├──Tratamento, exploração e análise de dados Projeto 1/
 ```
 
 ### 🛠️ Stack Completa
