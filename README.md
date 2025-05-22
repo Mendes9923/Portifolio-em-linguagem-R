@@ -7,7 +7,7 @@
 Repositório profissional demonstrando aplicações avançadas da linguagem R em análise de dados, estatística e visualização.
 # Conceitos Básicos de R
 
-Este repositório reúne **sete scripts introdutórios** em R, com foco em conceitos fundamentais da linguagem.
+Este repositório reúne **dez scripts introdutórios** em R, com foco em conceitos fundamentais da linguagem.
 
 ## Arquivos
 
@@ -87,6 +87,34 @@ Explica o funcionamento da instalação, carregamento e remoção de pacotes no 
 - Checagem e instalação condicional com `require()`
 - Remoção de pacotes com `remove.packages()`
 - Acesso à documentação de pacotes com `?nome_do_pacote`
+
+### `funcoes.R`
+
+Apresenta a definição e uso de **funções personalizadas** em R:
+
+- Criação de funções com `function()`
+- Uso de `return()` para retornar valores
+- Exemplos práticos como:
+  - Comparação de dois números
+  - Cálculo da hipotenusa pelo Teorema de Pitágoras
+  - Cálculo de catetos ou hipotenusa de forma condicional
+
+### `estrutura_repeticao.R`
+
+Explora as **estruturas de repetição** disponíveis em R:
+
+- `for`: iteração simples sobre sequências e vetores
+- `while`: laços condicionais
+- `repeat`: laço infinito com condição de parada manual (`break()`)
+
+### `estrutura+condicional.R`
+
+Demonstra o uso de **estruturas condicionais**:
+
+- `if`, `else if` e `else`
+- `ifelse()` para avaliação condicional vetorial
+- Exemplos com condições numéricas e textos (ex: classificação de nota)
+
 
 ## 🧩 Técnicas Demonstradas
 
