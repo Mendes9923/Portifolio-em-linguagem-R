@@ -114,8 +114,93 @@ Demonstra o uso de **estruturas condicionais**:
 - `if`, `else if` e `else`
 - `ifelse()` para avaliação condicional vetorial
 - Exemplos com condições numéricas e textos (ex: classificação de nota)
+- 
 
+## Projeto 1 - Tratamento de Dados COVID-19 no Estado de São Paulo
+### 📄 Descrição:
+Este projeto consiste no tratamento de dados referentes à COVID-19 no estado de São Paulo. O objetivo foi preparar o conjunto de dados para análises futuras, realizando limpeza, transformação de variáveis, exclusão de inconsistências e criação de novas métricas.
 
+### 📂 Arquivo de Dados: `dados_covid_sp.csv`
+
+🔧 Processos Realizados:
+
+- Leitura dos dados no formato `.csv`
+- Renomeação de variáveis para maior clareza
+- Exclusão de colunas e linhas irrelevantes ou inconsistentes
+- Tratamento de valores ausentes `(NA e NaN)`
+- Conversão de tipos de variáveis `(datas, inteiros, numéricos)`
+- Criação de uma variável derivada: percentual de idosos `(idoso(%))`
+- Exportação do dataset tratado para `.csv` e `.txt`
+
+### 🧠 Principais funções e pacotes utilizados:
+- dplyr para manipulação de dados
+- readr para exportação
+- Funções como`rename(), filter(), select(), slice(), mutate(), glimpse(), as.Date(), write_delim()` entre outras
+
+  ## Pacotes
+```r
+if(!require(dplyr)) install.packages("dplyr")
+if(!require(readr)) install.packages("readr")
+
+library(dplyr)
+library(readr)
+```
+  ## Importação dos Dados
+  ```r
+setwd("Caminho/para/seu/diretorio")
+dados <- read.csv2("dados_covid_sp.csv", sep = ";", encoding = "UTF-8")
+head(dados)
+````
+  ## Renomeando Colunas
+  ```r
+dados <- rename(dados,
+                municipio = nome_munic,
+                data = datahora,
+                rotulo_mapa = map_leg,
+                codigo_mapa = map_leg_s)
+```
+  ## Limpando os Dados
+  ```r
+dados <- dados %>%
+  select(-cod_ra, -codigo_ibge, -cod_drs) %>%
+  select(-c(14, 15)) %>%
+  select(-c(17:19)) %>%
+  slice(-c(239660, 239661:239666)) %>%
+  filter(municipio != "Ignorado")
+```
+  ## Tratando Valores Ausentes
+  ```r
+sapply(dados, function(x) sum(is.na(x)))
+sapply(dados, function(x) sum(is.nan(x)))
+
+dados[is.na(dados)] <- 54
+
+# Corrigindo coluna 'semana_epidem'
+dados$semana_epidem[dados$semana_epidem == 54] <- 2021
+```
+  ## Conversão de Tipos
+  ```r
+dados$data <- as.Date(dados$data, format = "%d/%m/%Y")
+dados$semana_epidem <- as.integer(dados$semana_epidem)
+
+dados[5:8] <- lapply(dados[5:8], as.character)
+dados[5:6] <- lapply(dados[5:6], as.integer)
+dados[7:8] <- lapply(dados[7:8], as.numeric)
+
+glimpse(dados)
+```
+  ## Criação de Novas Variáveis
+  ```r
+dados <- dados %>%
+  mutate(`idoso(%)` = 100 * pop_60 / pop)
+
+head(dados)
+```
+  ## Exportando os Dados Tratados
+```r  
+write_delim(dados, "covid_sp_tratado.csv", delim = ",")
+write.table(dados, "covid_sp_tratado.txt", sep = ",", row.names = FALSE)
+```
 ## 🧩 Técnicas Demonstradas
 
 ### 🔧 Manipulação de Dados
