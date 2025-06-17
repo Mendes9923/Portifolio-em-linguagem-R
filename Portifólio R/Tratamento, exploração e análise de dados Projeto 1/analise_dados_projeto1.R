@@ -1,5 +1,5 @@
 ############################################
-###    EXPLORAÇÃO E ANÁLISE DOS DADOS    ###
+###    EXPLORA??O E AN?LISE DOS DADOS    ###
 ############################################
 
 # CARREGAR PACOTES
@@ -7,8 +7,8 @@ library(dplyr)
 if(!require(rstatix)) install.packages("rstatix") 
 library(rstatix)
 
-# BUSCAR DIRETÓRIO (PASTA COM OS ARQUIVOS)
-setwd("C:/Users/Luciano/Desktop/Linguagem_R/dados-covid-sp-master/data")
+# BUSCAR DIRET?RIO (PASTA COM OS ARQUIVOS)
+setwd("C:/Users/Daniel Mendes/Downloads/PortifÃ³lio R/Tratamento, exploraÃ§Ã£o e anÃ¡lise de dados Projeto 1/dados-covid-sp-master/dados-covid-sp-master/data")
 
 # ABRIR ARQUIVO
 covid_sp_tratado <- read.csv2('covid_sp_tratado.csv', sep = ";", encoding="UTF-8")
@@ -73,11 +73,11 @@ View(covid_guarulhos)
 
 
 
-### ANÁLISES ESTATÍSTICAS
+### AN?LISES ESTAT?STICAS
 
 # Medidas de centralidade
 
-# Média
+# M?dia
 mean(covid_campinas$obitos_novos)
 mean(covid_campinas$casos_novos)
 
@@ -86,9 +86,9 @@ summarise_at(covid_campinas, vars(obitos_novos, casos_novos), mean)
 mean(covid_guarulhos$obitos_novos)
 mean(covid_guarulhos$casos_novos)
 
-# Média móvel
-plot(covid_campinas$data,covid_campinas$casos_mm7d, title("MÉDIA MÓVEL"), col = "red")
-plot(covid_campinas$data,covid_campinas$obitos_mm7d, title("MÉDIA MÓVEL"), col = "purple")
+# M?dia m?vel
+plot(covid_campinas$data,covid_campinas$casos_mm7d, title("M?DIA M?VEL"), col = "red")
+plot(covid_campinas$data,covid_campinas$obitos_mm7d, title("M?DIA M?VEL"), col = "purple")
 
 
 
@@ -104,13 +104,13 @@ median(covid_guarulhos$casos_novos)
 
 # Moda
 
-# Criando uma função
+# Criando uma fun??o
 moda <- function(m) {
-  valor_unico <- unique(m) #Busca o valor único para a coluna.
-  valor_unico[which.max(tabulate(match(m, valor_unico)))] #tabular (contabilizar quantas vezes o valor único aparece) e buscar o maior valor
+  valor_unico <- unique(m) #Busca o valor ?nico para a coluna.
+  valor_unico[which.max(tabulate(match(m, valor_unico)))] #tabular (contabilizar quantas vezes o valor ?nico aparece) e buscar o maior valor
 }
 
-# Obtenção da moda
+# Obten??o da moda
 moda(covid_campinas$obitos_novos)
 moda(covid_campinas$casos_novos)
 
@@ -156,9 +156,9 @@ hist(covid_guarulhos$casos_novos, col="yellow")
 
 
 
-# Medidas de posição
+# Medidas de posi??o
 
-# Mínimo
+# M?nimo
 min(covid_campinas$obitos_novos)
 min(covid_campinas$casos_novos)
 summarise_at(covid_campinas, vars(obitos_novos, casos_novos), min)
@@ -167,7 +167,7 @@ min(covid_guarulhos$obitos_novos)
 min(covid_guarulhos$casos_novos)
 
 
-# Máximo
+# M?ximo
 max(covid_campinas$obitos_novos)
 max(covid_campinas$casos_novos)
 summarise_at(covid_campinas, vars(obitos_novos, casos_novos), max)
@@ -244,17 +244,17 @@ covid_campinas_sem_outliers<-covid_campinas %>% filter(data != "2020-06-19")
 boxplot(covid_campinas_sem_outliers$casos_novos)
 
 
-# O summary resulta em resumo estatístico
-# de todas as variáveis numéricas/inteiras
+# O summary resulta em resumo estat?stico
+# de todas as vari?veis num?ricas/inteiras
 summary (covid_guarulhos)
 
 
 
 
 
-# Medidas de Dispersão
+# Medidas de Dispers?o
 
-# Variância
+# Vari?ncia
 var(covid_campinas$obitos_novos)
 var(covid_campinas$casos_novos)
 
@@ -265,7 +265,7 @@ var(covid_julho_campinas$obitos_novos)
 var(covid_julho_campinas$casos_novos)
 
 
-# Desvio padrão
+# Desvio padr?o
 sd(covid_campinas$obitos_novos)
 sd(covid_campinas$casos_novos)
 
@@ -285,7 +285,7 @@ sd(covid_julho_campinas$casos_novos)
 
 # TESTES DE NORMALIDADE
 
-# Existem 4 testes de normalidade principais (numéricos) e dois testes gráficos:
+# Existem 4 testes de normalidade principais (num?ricos) e dois testes gr?ficos:
 # Shapiro-Wilk (limite de 5000 amostras)
 # Anderson-Darling
 # Kolmogorov_Smirnov
@@ -293,8 +293,8 @@ sd(covid_julho_campinas$casos_novos)
 # Histograma
 # QQplot
 
-# Nível de significância DE 0,05(5%) ou nível de confiança de 95%(MAIS UTILIZADO):
-# Quando o parâmetro p > 0,05 (distribuição normal).
+# N?vel de signific?ncia DE 0,05(5%) ou n?vel de confian?a de 95%(MAIS UTILIZADO):
+# Quando o par?metro p > 0,05 (distribui??o normal).
 
 
 if(!require(nortest)) install.packages("nortest")
@@ -304,7 +304,7 @@ library(nortest)
 hist(covid_campinas$casos_novos, probability=T, col="blue")
 lines(density(covid_campinas$casos_novos) , col="red")
 
-# QQPLOT (GRÁFICO DE DISTRIBUIÇÃO NORMAL)
+# QQPLOT (GR?FICO DE DISTRIBUI??O NORMAL)
 qqnorm(covid_campinas$casos_novos)
 qqline(covid_campinas$casos_novos)
 
@@ -333,33 +333,33 @@ cvm.test(covid_campinas$casos_novos)
 
 
 
-# CORRELAÇÃO LINEAR
-# method: "pearson" para dados paramétricos(normalidade e homocedasticidade))
-#         "spearman" (volume grande de dados não paramétricos)
-#         "kendall" (volume pequeno de dados não paramétricos)
+# CORRELA??O LINEAR
+# method: "pearson" para dados param?tricos(normalidade e homocedasticidade))
+#         "spearman" (volume grande de dados n?o param?tricos)
+#         "kendall" (volume pequeno de dados n?o param?tricos)
 
 plot(covid_campinas$casos,covid_campinas$obitos)
 cor(covid_campinas$casos,covid_campinas$obitos,method = "spearman")
 
-regressao <- lm(formula= obitos ~ casos, data=covid_campinas) #modelo de regressão
+regressao <- lm(formula= obitos ~ casos, data=covid_campinas) #modelo de regress?o
 regressao$coefficients
 summary(regressao)
 
-### Equação: obitos=51.67+0,0337*casos
+### Equa??o: obitos=51.67+0,0337*casos
 
-### Coeficiente de determinação (ajustado): 0,9832
-
-
+### Coeficiente de determina??o (ajustado): 0,9832
 
 
 
 
 
-### GRÁFICO DE LINHA COM AJUSTE DE RETA  COM GGPLOT2
+
+
+### GR?FICO DE LINHA COM AJUSTE DE RETA  COM GGPLOT2
 
 if(!require(ggplot2)) install.packages("ggplot2") 
 library(ggplot2)
-if(!require(ggpubr)) install.packages("ggpubr") #equação da reta no gráfico
+if(!require(ggpubr)) install.packages("ggpubr") #equa??o da reta no gr?fico
 library(ggpubr)
 
 ggplot(data = covid_campinas, mapping = aes(x = casos, y = obitos)) +
@@ -372,7 +372,7 @@ ggplot(data = covid_campinas, mapping = aes(x = casos, y = obitos)) +
 
 
 if(!require(corrplot)) install.packages("corrplot")                               
-library(corrplot) # gráfico de correlação 
+library(corrplot) # gr?fico de correla??o 
 
 matriz_corr <- cor(covid_campinas[5:13], method = "spearman")
 View(matriz_corr)
@@ -380,22 +380,22 @@ View(matriz_corr)
 corrplot(matriz_corr, method = "color")
 corrplot(matriz_corr, method="color", 
          type="full", order="original", 
-         addCoef.col = "black", # adiciona o coeficiente à matriz
-         tl.col="black", tl.srt=45, # cor e rotação do nome das variáveis
+         addCoef.col = "black", # adiciona o coeficiente ? matriz
+         tl.col="black", tl.srt=45, # cor e rota??o do nome das vari?veis
 )
 
 
 
-# GRÁFICOS LINEARES POR CIDADES
+# GR?FICOS LINEARES POR CIDADES
 
 covid_cidades<-covid_sp_tratado %>% filter (municipio  %in% c("Campinas", "Guarulhos", "Sorocaba"))
 View(covid_cidades)
 
 ggplot(covid_cidades, aes(x = casos, y = obitos, color = municipio)) +
   geom_line() +
-  labs(title = "Evolução dos óbitos em função dos casos de COVID",
+  labs(title = "Evolu??o dos ?bitos em fun??o dos casos de COVID",
        x = "Casos",
-       y = "Óbitos") +
+       y = "?bitos") +
   theme_classic()
 
 

@@ -1,0 +1,81 @@
+Estou estidando o R 
+Me fala sobe a função de cada inte abaixo
+
+📊 Funções para análise estatística e visualização:
+summary()
+
+Função: Fornece um resumo estatístico de um objeto (como data frames, vetores, fatores).
+
+Exemplo: summary(df) mostra mínimo, 1º quartil, mediana, média, 3º quartil e máximo de cada coluna numérica do df.
+
+boxplot()
+
+Função: Cria um gráfico de caixa (boxplot) que mostra a distribuição de um conjunto de dados, destacando mediana, quartis e outliers.
+
+Exemplo: boxplot(df$salario) mostra a distribuição dos salários.
+
+outliers
+
+Função: Não é uma função padrão do R, mas se refere à detecção de valores atípicos. Pode ser feito com código manual ou pacotes como outliers, dplyr ou rstatix.
+
+IQR()
+
+Função: Calcula o intervalo interquartil (Q3 - Q1), uma medida da dispersão dos dados.
+
+Exemplo: IQR(df$idade) retorna o intervalo interquartil das idades.
+
+quantile()
+
+Função: Retorna os quantis de um conjunto de dados.
+
+Exemplo: quantile(df$idade, probs = c(0.25, 0.75)) retorna o 1º e 3º quartis.
+
+summarise() (ou summarize() no inglês americano)
+
+Função: Resuma variáveis de um data frame, geralmente com dplyr.
+
+Exemplo: df %>% summarise(media_salario = mean(salario)) calcula a média dos salários.
+
+range()
+
+Função: Retorna o menor e o maior valor de um vetor.
+
+Exemplo: range(df$idade) retorna o intervalo completo (mínimo e máximo) de idades.
+
+hist()
+
+Função: Cria um histograma, que mostra a distribuição da frequência dos dados.
+
+Exemplo: hist(df$idade) mostra como as idades estão distribuídas.
+
+plot()
+
+Função: Gera gráficos básicos. Pode ser usado para relações entre variáveis.
+
+Exemplo: plot(df$idade, df$salario) cria um gráfico de dispersão.
+
+🔄 Operadores e funções de manipulação:
+%>% (pipe operator)
+
+Função: Permite encadear funções de forma mais legível. Lê-se como “então”.
+
+Exemplo: df %>% filter(idade > 30) %>% summarise(media = mean(salario)).
+
+glimpse()
+
+Função: Mostra uma visão geral (compacta e estruturada) de um data frame.
+
+Exemplo: glimpse(df) mostra o tipo e os primeiros valores de cada coluna.
+
+📁 Ambiente e pacotes:
+setwd()
+
+Função: Define o diretório de trabalho.
+
+Exemplo: setwd("C:/MeusProjetos/R") define o local onde arquivos serão lidos/salvos.
+
+library()
+
+Função: Carrega pacotes R instalados no ambiente.
+
+Exemplo: library(dplyr) carrega o pacote dplyr para manipulação de dados.
