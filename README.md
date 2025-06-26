@@ -262,6 +262,72 @@ portfolio-R/
 | Relatórios     | RMarkdown, bookdown, knitr              |
 | Interatividade | shiny, flexdashboard                    |
 
+## Projeto 2 - Exploração e Análise de Dados de SRAG em São Paulo (2020)
+### 📄 Descrição:
+Análise exploratória de dados de Síndrome Respiratória Aguda Grave (SRAG) no estado de São Paulo em 2020, com foco em visualizações estatísticas e identificação de padrões demográficos.
+
+### 📂 Arquivo de Dados: `SRAG_2020.csv`
+
+🔍 Principais Análises Realizadas:
+
+- Limpeza e preparação dos dados (tratamento de valores ausentes, conversão de tipos)
+- Análise demográfica (sexo, raça, região e faixa etária)
+- Criação de diversos tipos de visualizações:
+  - Gráficos de barras (simples, agrupados e empilhados)
+  - Boxplots (identificação de outliers)
+  - Histogramas e análise de distribuição
+  - Gráficos de dispersão e bolhas
+  - Gráficos de setores (pizza)
+  - Ogivas e polígonos de frequência
+
+### 📊 Principais Resultados:
+- Identificação da distribuição etária dos casos
+- Análise comparativa por gênero e raça
+- Visualização temporal dos casos
+- Análise geográfica por região (urbana/rural)
+
+### 🧠 Principais funções e pacotes utilizados:
+
+# Pacotes
+library(dplyr)      # Manipulação de dados
+library(ggplot2)    # Visualização avançada
+library(plotly)     # Gráficos interativos
+library(rstatix)    # Análises estatísticas
+
+# Técnicas aplicadas
+- Tratamento de NA/NAN: sapply(is.na), sapply(is.nan)
+- Conversão de tipos: as.Date(), as.factor()
+- Visualização: barplot(), hist(), boxplot(), qqnorm()
+- Análise estatística: shapiro.test(), ad.test(), identify_outliers()
+
+```r
+# Gráfico de barras com ggplot2
+ggplot(srag_sp_mod, aes(x = sexo)) +
+  geom_bar(fill ='red') + 
+  labs(title="Quantidade por sexo", x = "Sexo", y = "Contagem")
+
+# Boxplot interativo com plotly
+plot_ly(srag_atual, y = ~idade, color = ~sexo, type = "box") %>%
+  layout(title = "BOXPLOT POR IDADE E SEXO")
+
+# Análise de normalidade
+shapiro.test(srag_atual$idade)  # Teste de Shapiro-Wilk
+ad.test(srag_atual$idade)       # Teste Anderson-Darling
+```
+````
+portfolio-R/
+├── Introdução/
+├── Linguagem R/
+├── Projeto 1 - Tratamento de Dados COVID-19/
+├── Projeto 2 - Análise SRAG SP/
+│   ├── projeto2.R             # Script principal
+│   ├── SRAG_2020.csv          # Dados originais
+│   ├── analises/              # Resultados das análises
+│   └── graficos/              # Visualizações exportadas
+└── README.md
+````
+
+
 ## 📬 Contato e Redes
 
 -[LinkedIn](https://www.linkedin.com/in/daniel-mendes-a64326140)
